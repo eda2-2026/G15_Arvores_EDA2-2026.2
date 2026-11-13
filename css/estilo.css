@@ -1,0 +1,57 @@
+:root{--bg:#f6f4f0;--panel:#fff;--ink:#1d1b1a;--mute:#6b6560;--line:#d9d3cb;--red:#b3261e;--blk:#1d1b1a;--ring:#d98a00;--btn:#1d1b1a;--btnt:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161514;--panel:#201e1d;--ink:#eee9e3;--mute:#a39c94;--line:#3a3633;--red:#d6453c;--blk:#0d0c0c;--ring:#f0b429;--btn:#eee9e3;--btnt:#161514}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.5}
+main{max-width:1180px;height:100dvh;margin:0 auto;padding:14px 16px;display:flex;flex-direction:column}
+.layout{flex:1;min-height:0;display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px}
+@media (max-width:820px){main{height:auto}.layout{grid-template-columns:1fr}.stage{height:380px;flex:none}}
+.principal{display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0}
+.lateral{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+.lateral h2{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:0;font-weight:normal}
+h1{font-size:1.5rem;margin:0 0 2px;letter-spacing:-.01em;display:flex;align-items:center;gap:12px}
+.dots{display:inline-flex}.dots i{width:22px;height:22px;border-radius:50%;background:var(--red);box-shadow:0 2px 4px rgba(0,0,0,.25)}.dots i+i{background:var(--blk);margin-left:-7px;border:1px solid var(--mute)}
+.sub{color:var(--mute);margin:0 0 10px;font-size:.88rem}
+.bar{display:flex;flex-direction:column;gap:14px}
+.bar>button,.bar>.num{width:100%}
+input{font:inherit;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)}
+button{font:inherit;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:transform .12s,box-shadow .12s}
+button:not(:disabled):hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.15)}
+button.p{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
+button:disabled{opacity:.4;cursor:default}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.stage{position:relative;flex:1;min-height:240px;background:radial-gradient(var(--line) 1px,transparent 1px) 0 0/22px 22px,var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.canto{position:absolute;top:12px;z-index:2;display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:var(--ring);box-shadow:0 2px 8px rgba(0,0,0,.12);pointer-events:none}
+.canto[hidden]{display:none}
+.canto.esq{left:12px}.canto.dir{right:12px}
+.canto span{display:flex;flex-direction:column;line-height:1.2;color:var(--ink)}
+.canto small{color:var(--mute);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+.canto b{font-size:1rem}
+svg circle{filter:drop-shadow(0 2px 2px rgba(0,0,0,.28))}
+.stage svg{display:block;width:100%;height:100%}
+.nav{display:flex;gap:8px;align-items:center;margin:0;flex-wrap:wrap}
+.cnt{color:var(--mute);font-size:.9rem;margin-left:auto}
+.exp{background:var(--panel);border:1px solid color-mix(in srgb,var(--ring) 55%,var(--line));border-radius:14px;padding:12px 16px;min-height:84px;max-height:150px;overflow:auto;box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 12%,transparent),0 0 24px color-mix(in srgb,var(--ring) 24%,transparent)}
+.exp b{display:block;margin-bottom:4px;font-size:1.05rem}
+.leg{display:flex;flex-direction:column;gap:8px;color:var(--mute);font-size:.85rem;padding-top:14px;border-top:1px solid var(--line)}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.empty{padding:48px 12px;text-align:center;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Campo numérico com botões próprios, no mesmo estilo dos demais (no lugar dos spinners nativos) */
+.num{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:var(--panel);overflow:hidden}
+.num input{width:84px;border:0;border-radius:0;text-align:center;background:transparent;-moz-appearance:textfield;appearance:textfield}
+.num input::-webkit-outer-spin-button,.num input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.num button{border:0;border-radius:0;padding:8px 12px;flex:none;background:transparent;box-shadow:none}
+.num button:not(:disabled):hover{transform:none;box-shadow:none;background:var(--line)}
+.num:focus-within{outline:2px solid var(--ring);outline-offset:2px}
+.num input:focus-visible{outline:none}
+
+.num input{flex:1;width:auto;min-width:0}
+
+/* Canvas: arrastar para mover e botões de zoom no canto inferior direito */
+.stage,.stage svg{user-select:none;-webkit-user-select:none} /* evita selecionar os números ao arrastar */
+.stage svg{touch-action:none;cursor:grab}
+.stage svg.arrastando{cursor:grabbing}
+.zoom{position:absolute;right:12px;bottom:12px;z-index:2;display:flex;gap:4px;padding:5px;background:var(--panel);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.zoom button{padding:5px 13px;border:0;background:transparent;line-height:1.2}
+.zoom button:not(:disabled):hover{transform:none;box-shadow:none;background:var(--line)}

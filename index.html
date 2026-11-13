@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador de árvore vermelho & preto</title>
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<main>
+<h1><span class="dots"><i></i><i></i></span>Simulador de árvore vermelho & preto</h1>
+<p class="sub">Insira valores e acompanhe cada passo: recolorações, rotações e o caso aplicado.</p>
+
+<div class="layout">
+  <!-- Coluna esquerda: controles e legenda -->
+  <aside class="lateral">
+    <h2>Controles</h2>
+    <div class="bar">
+      <div class="num">
+        <button type="button" id="menos" aria-label="Diminuir valor">−</button>
+        <input id="v" type="number" placeholder="valor" aria-label="Valor a inserir">
+        <button type="button" id="mais" aria-label="Aumentar valor">+</button>
+      </div>
+      <button class="p" id="ins">Inserir</button>
+      <button id="ex">Exemplo</button>
+      <button id="clr">Limpar</button>
+    </div>
+    <div class="leg">
+      <h2>Legenda</h2>
+      <span><i style="background:var(--red)"></i>nó vermelho</span>
+      <span><i style="background:var(--blk);border:1px solid var(--mute)"></i>nó preto</span>
+      <span><i style="border:2px solid var(--ring)"></i>nó em destaque (novo, pai, tio, avô)</span>
+      <span><i style="border-radius:3px;background:var(--blk);border:1px solid var(--mute)"></i>NIL (folha vazia, preta)</span>
+    </div>
+  </aside>
+
+  <!-- Coluna principal: canvas da árvore, navegação e explicação -->
+  <section class="principal">
+    <div class="stage">
+      <div class="canto esq" id="rot" hidden></div>
+      <div class="canto dir" id="caso" hidden></div>
+      <svg id="svg" role="img" aria-label="Árvore vermelho e preto"></svg>
+      <div class="zoom">
+        <button type="button" id="zmenos" aria-label="Diminuir zoom">−</button>
+        <button type="button" id="zmais" aria-label="Aumentar zoom">+</button>
+        <button type="button" id="zcentro" aria-label="Centralizar a árvore">Centralizar</button>
+      </div>
+    </div>
+    <div class="nav">
+      <button id="start">« Início</button>
+      <button id="prev">‹ Anterior</button>
+      <button id="next" class="p">Próximo ›</button>
+      <button id="play">Reproduzir</button>
+      <button id="end">Fim »</button>
+      <span class="cnt" id="cnt"></span>
+    </div>
+    <div class="exp" id="exp"></div>
+  </section>
+</div>
+</main>
+<!-- Ordem importa: lógica primeiro, depois visual, por último os controles -->
+<script src="js/arvore.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/visual.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
