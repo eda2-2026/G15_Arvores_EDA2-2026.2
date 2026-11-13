@@ -12,20 +12,40 @@
 <p class="sub">Insira ou remova valores e acompanhe cada passo: recolorações, rotações e o caso aplicado.</p>
 
 <div class="layout">
-  <!-- Coluna esquerda: controles e legenda -->
+  <!-- Coluna esquerda: controles, guia e legenda -->
   <aside class="lateral">
-    <h2>Controles</h2>
-    <div class="bar">
-      <div class="num">
-        <button type="button" id="menos" aria-label="Diminuir valor">−</button>
-        <input id="v" type="number" placeholder="valor" aria-label="Valor a inserir ou remover">
-        <button type="button" id="mais" aria-label="Aumentar valor">+</button>
+    <div class="secao-controle">
+      <h2>Operações no Nó</h2>
+      <div class="bar">
+        <div class="num">
+          <button type="button" id="menos" aria-label="Diminuir valor">−</button>
+          <input id="v" type="number" placeholder="Digite um valor" aria-label="Valor a inserir ou remover">
+          <button type="button" id="mais" aria-label="Aumentar valor">+</button>
+        </div>
+        <div class="acoes-duplas">
+          <button class="p btn-ins" id="ins" title="Inserir nó na árvore">+ Inserir</button>
+          <button class="btn-rem" id="rem" title="Remover nó da árvore">− Remover</button>
+        </div>
       </div>
-      <button class="p" id="ins">Inserir</button>
-      <button id="rem">Remover</button>
-      <button id="ex">Exemplo</button>
-      <button id="clr">Limpar</button>
     </div>
+
+    <div class="secao-controle">
+      <h2>Ações da Árvore</h2>
+      <div class="acoes-gerais">
+        <button id="ex" class="btn-sec" title="Carregar sequência de nós para demonstração">Carregar Exemplo</button>
+        <button id="clr" class="btn-sec btn-limpar" title="Limpar todos os nós da árvore">Limpar Árvore</button>
+      </div>
+    </div>
+
+    <!-- Guia de contexto para orientar o usuário -->
+    <div class="card-guia" id="card-guia">
+      <span class="guia-icone" aria-hidden="true">💡</span>
+      <div class="guia-corpo">
+        <small class="guia-rotulo">O que fazer agora</small>
+        <p id="guia-txt">Digite um número e clique em <b>+ Inserir</b>, ou teste direto com <b>Carregar Exemplo</b>.</p>
+      </div>
+    </div>
+
     <div class="leg">
       <h2>Legenda</h2>
       <span><i style="background:var(--red)"></i>nó vermelho</span>
@@ -41,20 +61,34 @@
       <div class="canto esq" id="rot" hidden></div>
       <div class="canto dir" id="caso" hidden></div>
       <svg id="svg" role="img" aria-label="Árvore vermelho e preto"></svg>
+      <div class="dica-canvas">🖱️ Arraste para mover • Roda para zoom</div>
       <div class="zoom">
         <button type="button" id="zmenos" aria-label="Diminuir zoom">−</button>
         <button type="button" id="zmais" aria-label="Aumentar zoom">+</button>
         <button type="button" id="zcentro" aria-label="Centralizar a árvore">Centralizar</button>
       </div>
     </div>
-    <div class="nav">
-      <button id="start">« Início</button>
-      <button id="prev">‹ Anterior</button>
-      <button id="next" class="p">Próximo ›</button>
-      <button id="play">Reproduzir</button>
-      <button id="end">Fim »</button>
-      <span class="cnt" id="cnt"></span>
+
+    <!-- Barra de navegação com progresso visual -->
+    <div class="painel-navegacao">
+      <div class="trilha-progresso" title="Progresso da operação atual">
+        <div class="barra-progresso" id="prog"></div>
+      </div>
+      <div class="nav">
+        <div class="nav-botoes">
+          <button id="start" title="Primeiro passo (Home)">⏮ Início</button>
+          <button id="prev" title="Passo anterior (Seta esquerda ←)">◀ Anterior</button>
+          <button id="play" class="btn-play" title="Reproduzir automaticamente (Espaço)">▶ Reproduzir</button>
+          <button id="next" class="p btn-proximo" title="Próximo passo (Seta direita →)">Próximo ▶</button>
+          <button id="end" title="Último passo (End)">Fim ⏭</button>
+        </div>
+        <span class="cnt badge-passo" id="cnt"></span>
+      </div>
+      <div class="atalhos-hint">
+        <small>Atalhos: <b>←</b> Anterior &nbsp;|&nbsp; <b>→</b> Próximo &nbsp;|&nbsp; <b>Espaço</b> Play/Pausa &nbsp;|&nbsp; <b>Enter</b> Inserir</small>
+      </div>
     </div>
+
     <div class="exp" id="exp"></div>
   </section>
 </div>
