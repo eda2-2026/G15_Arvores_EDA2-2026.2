@@ -18,7 +18,7 @@
     VisualSVG.desenhar({ svg: $("svg"), rotacao: $("rot"), caso: $("caso") }, passo);
     $("exp").innerHTML = passo
       ? "<b>" + passo.titulo + (passo.caso ? " - " + passo.caso : "") + "</b>" + passo.descricao
-      : "<b>Pronto para começar</b>Digite um número e clique em Inserir, ou use o Exemplo.";
+      : "<b>Pronto para começar</b>Digite um número e clique em Inserir ou Remover, ou use o Exemplo.";
 
     const ultimo = passos.length - 1;
     $("start").disabled = $("prev").disabled = atual <= 0;
@@ -39,6 +39,16 @@
     const primeiro = ArvoreRN.inserir(parseInt(campo.value, 10));
     campo.value = "";
     mostrar(primeiro); // começa a mostrar do primeiro passo desta inserção
+    campo.focus();
+  }
+
+  function removerDoCampo() {
+    const campo = $("v");
+    if (campo.value === "") return;
+    pararReproducao();
+    const primeiro = ArvoreRN.remover(parseInt(campo.value, 10));
+    campo.value = "";
+    mostrar(primeiro); // começa a mostrar do primeiro passo desta remoção
     campo.focus();
   }
 
@@ -64,6 +74,7 @@
 
   // Ligações entre botões e ações
   $("ins").onclick = inserirDoCampo;
+  $("rem").onclick = removerDoCampo;
   $("v").onkeydown = function (e) { if (e.key === "Enter") inserirDoCampo(); };
   $("ex").onclick = inserirExemplo;
   $("clr").onclick = function () { pararReproducao(); ArvoreRN.limpar(); CameraSVG.centralizar(); mostrar(0); };

@@ -38,6 +38,11 @@ const VisualSVG = (function () {
         }
         return;
       }
+      if (no.ehSentinela) {
+        posicoes[no.id] = posicao(coluna++, nivel);
+        nos.push(no);
+        return;
+      }
       visitar(no.esq, nivel + 1, no.id);
       posicoes[no.id] = posicao(coluna++, nivel);
       nos.push(no);

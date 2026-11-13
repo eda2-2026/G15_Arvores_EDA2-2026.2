@@ -9,7 +9,7 @@
 <body>
 <main>
 <h1><span class="dots"><i></i><i></i></span>Simulador de árvore vermelho & preto</h1>
-<p class="sub">Insira valores e acompanhe cada passo: recolorações, rotações e o caso aplicado.</p>
+<p class="sub">Insira ou remova valores e acompanhe cada passo: recolorações, rotações e o caso aplicado.</p>
 
 <div class="layout">
   <!-- Coluna esquerda: controles e legenda -->
@@ -18,10 +18,11 @@
     <div class="bar">
       <div class="num">
         <button type="button" id="menos" aria-label="Diminuir valor">−</button>
-        <input id="v" type="number" placeholder="valor" aria-label="Valor a inserir">
+        <input id="v" type="number" placeholder="valor" aria-label="Valor a inserir ou remover">
         <button type="button" id="mais" aria-label="Aumentar valor">+</button>
       </div>
       <button class="p" id="ins">Inserir</button>
+      <button id="rem">Remover</button>
       <button id="ex">Exemplo</button>
       <button id="clr">Limpar</button>
     </div>
@@ -29,7 +30,7 @@
       <h2>Legenda</h2>
       <span><i style="background:var(--red)"></i>nó vermelho</span>
       <span><i style="background:var(--blk);border:1px solid var(--mute)"></i>nó preto</span>
-      <span><i style="border:2px solid var(--ring)"></i>nó em destaque (novo, pai, tio, avô)</span>
+      <span><i style="border:2px solid var(--ring)"></i>nó em destaque (pai, tio, irmão, duplo-preto...)</span>
       <span><i style="border-radius:3px;background:var(--blk);border:1px solid var(--mute)"></i>NIL (folha vazia, preta)</span>
     </div>
   </aside>
