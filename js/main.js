@@ -32,7 +32,7 @@
     VisualSVG.desenhar({ svg: $("svg"), rotacao: $("rot"), caso: $("caso") }, passo);
     $("exp").innerHTML = passo
       ? "<b>" + passo.titulo + (passo.caso ? " — " + passo.caso : "") + "</b>" + passo.descricao
-      : "<b>Pronto para começar</b>Digite um número e clique em <b>+ Inserir</b> ou experimente <b>Carregar Exemplo</b>.";
+      : "<b>Pronto para começar</b>Digite um número e clique em<b>Inserir</b> ou experimente<b>Carregar Exemplo</b>";
 
     const ultimo = passos.length - 1;
     $("start").disabled = $("prev").disabled = atual <= 0;

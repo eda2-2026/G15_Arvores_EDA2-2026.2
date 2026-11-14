@@ -81,6 +81,15 @@ const VisualSVG = (function () {
     return layout.nos.map(function (no) {
       const p = layout.posicoes[no.id];
       const rotulo = destaques[no.id];
+      if (no.ehSentinela) { // NIL com o "preto extra" (duplo-preto): quadradinho, como os outros NIL
+        const anelNil = rotulo
+          ? '<rect x="' + (p.x - 15) + '" y="' + (p.y - 12) + '" width="30" height="24" rx="5" fill="none" stroke="var(--ring)" stroke-width="2.5"/>' +
+            '<text x="' + p.x + '" y="' + (p.y - 17) + '" text-anchor="middle" font-size="11" fill="var(--ring)" font-family="Georgia">' + rotulo + "</text>"
+          : "";
+        return "<g>" + anelNil +
+          '<rect x="' + (p.x - 11) + '" y="' + (p.y - 8) + '" width="22" height="16" rx="3" fill="var(--blk)" stroke="var(--mute)" stroke-width="1.5"/>' +
+          '<text x="' + p.x + '" y="' + (p.y + 4) + '" text-anchor="middle" font-size="9" fill="#fff" font-family="Georgia">NIL</text></g>';
+      }
       const vermelho = no.cor === ArvoreRN.VERMELHO;
       const anel = rotulo
         ? '<circle cx="' + p.x + '" cy="' + p.y + '" r="23" fill="none" stroke="var(--ring)" stroke-width="2.5"/>' +
