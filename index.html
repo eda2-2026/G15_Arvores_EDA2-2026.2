@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simulador de árvore vermelho & preto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
@@ -37,15 +40,6 @@
       </div>
     </div>
 
-    <!-- Guia de contexto para orientar o usuário -->
-    <div class="card-guia" id="card-guia">
-      <span class="guia-icone" aria-hidden="true">💡</span>
-      <div class="guia-corpo">
-        <small class="guia-rotulo">O que fazer agora</small>
-        <p id="guia-txt">Digite um número e clique em <b>+ Inserir</b>, ou teste direto com <b>Carregar Exemplo</b>.</p>
-      </div>
-    </div>
-
     <div class="leg">
       <h2>Legenda</h2>
       <span><i style="background:var(--red)"></i>nó vermelho</span>
@@ -53,7 +47,21 @@
       <span><i style="border:2px solid var(--ring)"></i>nó em destaque (pai, tio, irmão, duplo-preto...)</span>
       <span><i style="border-radius:3px;background:var(--blk);border:1px solid var(--mute)"></i>NIL (folha vazia, preta)</span>
     </div>
+
+    <div class="secao-travessia">
+      <button id="btn-inorder" class="btn-inorder" title="Ver a travessia em ordem da árvore atual">Travessia em ordem</button>
+    </div>
   </aside>
+
+  <!-- Modal: Travessia em Ordem -->
+  <div id="modal-inorder" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" hidden>
+    <div class="modal-caixa">
+      <h3 id="modal-titulo">Travessia em ordem</h3>
+      <p class="modal-sub">Visita os nós em ordem crescente: esquerda → raiz → direita</p>
+      <div id="modal-resultado" class="modal-resultado"></div>
+      <button id="modal-fechar" class="btn-modal-fechar">Fechar</button>
+    </div>
+  </div>
 
   <!-- Coluna principal: canvas da árvore, navegação e explicação -->
   <section class="principal">

@@ -9,20 +9,6 @@
   let atual = -1;     // índice do passo exibido
   let relogio = null; // temporizador do botão "Reproduzir"
 
-  /** Atualiza o card didático com dicas contextuais do que fazer */
-  function atualizarGuia(passos, ultimo) {
-    const guia = $("guia-txt");
-    if (!guia) return;
-
-    if (!passos.length || !passos[atual] || !passos[atual].arvore) {
-      guia.innerHTML = "Digite um número e clique em <b>+ Inserir</b>, ou teste direto com <b>Carregar Exemplo</b>.";
-    } else if (atual < ultimo) {
-      guia.innerHTML = "Acompanhe a correção: clique em <b>Próximo ▶</b> ou use a seta <b>→</b> do teclado.";
-    } else {
-      guia.innerHTML = "Árvore balanceada e válida! Você pode inserir novos valores, remover nós ou navegar pelo histórico.";
-    }
-  }
-
   /** Mostra o passo de índice i (limitado ao intervalo válido). */
   function mostrar(i) {
     const passos = ArvoreRN.obterPassos();
@@ -61,8 +47,6 @@
     const temArvore = Boolean(passo && passo.arvore);
     $("rem").disabled = !temArvore;
     $("clr").disabled = !passos.length;
-
-    atualizarGuia(passos, ultimo);
   }
 
   function pararReproducao() {
@@ -71,24 +55,32 @@
     $("play").textContent = "▶ Reproduzir";
   }
 
+  function iniciarReproducao(primeiroPasso) {
+    clearInterval(relogio);
+    mostrar(primeiroPasso);
+    $("play").textContent = "⏸ Pausar";
+    relogio = setInterval(function () {
+      if (atual >= ArvoreRN.obterPassos().length - 1) pararReproducao();
+      else mostrar(atual + 1);
+    }, 1400);
+  }
+
   function inserirDoCampo() {
     const campo = $("v");
     if (campo.value === "") return;
-    pararReproducao();
     const primeiro = ArvoreRN.inserir(parseInt(campo.value, 10));
     campo.value = "";
-    mostrar(primeiro); // começa a mostrar do primeiro passo desta inserção
     campo.focus();
+    iniciarReproducao(primeiro); // sempre inicia/continua a reprodução
   }
 
   function removerDoCampo() {
     const campo = $("v");
     if (campo.value === "") return;
-    pararReproducao();
     const primeiro = ArvoreRN.remover(parseInt(campo.value, 10));
     campo.value = "";
-    mostrar(primeiro); // começa a mostrar do primeiro passo desta remoção
     campo.focus();
+    iniciarReproducao(primeiro); // sempre inicia/continua a reprodução
   }
 
   function inserirExemplo() {
@@ -173,6 +165,50 @@
   $("zmais").onclick = CameraSVG.aproximar;
   $("zmenos").onclick = CameraSVG.afastar;
   $("zcentro").onclick = CameraSVG.centralizar;
+
+  /* =========================================================
+     Travessia em Ordem (In-Order)
+     Percorre a cópia da árvore do passo atual: esq → raiz → dir
+     ========================================================= */
+  function inOrder(no, resultado) {
+    if (!no || no.ehSentinela) return;
+    inOrder(no.esq, resultado);
+    resultado.push(no.valor);
+    inOrder(no.dir, resultado);
+  }
+
+  function abrirModalInOrder() {
+    const passos = ArvoreRN.obterPassos();
+    const passo = passos[atual];
+    const resultado = [];
+
+    if (passo && passo.arvore) {
+      inOrder(passo.arvore, resultado);
+    }
+
+    const divResultado = $("modal-resultado");
+    if (resultado.length === 0) {
+      divResultado.textContent = "A árvore está vazia.";
+    } else {
+      divResultado.textContent = "[ " + resultado.join(", ") + " ]";
+    }
+
+    $("modal-inorder").removeAttribute("hidden");
+  }
+
+  $("btn-inorder").onclick = abrirModalInOrder;
+
+  $("modal-fechar").onclick = function () {
+    $("modal-inorder").setAttribute("hidden", "");
+  };
+
+  $("modal-inorder").addEventListener("click", function (e) {
+    if (e.target === this) this.setAttribute("hidden", "");
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") $("modal-inorder").setAttribute("hidden", "");
+  });
 
   mostrar(0);
 })();
