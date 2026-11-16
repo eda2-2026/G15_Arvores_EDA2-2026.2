@@ -90,6 +90,9 @@
       const i = ArvoreRN.inserir(valor);
       if (primeiro < 0) primeiro = i;
     });
+    [15, 20, 30].forEach(function (valor) {
+      ArvoreRN.remover(valor);
+    });
     mostrar(primeiro);
   }
 
