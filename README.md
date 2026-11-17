@@ -11,7 +11,7 @@ O simulador permite **inserir e remover valores** e acompanhar, passo a passo e 
 
 ## Vídeo de apresentação
 
-**Link do vídeo:** [Vídeo da Apresentação no YouTube](https://youtu.be/SEU_LINK_AQUI)
+**Link do vídeo:** [Vídeo da Apresentação no YouTube]([https://youtu.be/SEU_LINK_AQUI](https://youtu.be/Xab1uPoploI))
 
 ---
 
